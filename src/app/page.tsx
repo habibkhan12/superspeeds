@@ -202,7 +202,7 @@ export default function Home() {
                   className="flex items-center text-sm font-semibold tracking-[0.08em] text-neutral-800 whitespace-nowrap"
                 >
                   <span className="px-6">{item}</span>
-                  <span className="text-brand">Ä</span>
+                  <span className="text-brand">✦</span>
                 </span>
               ))}
             </div>
@@ -211,8 +211,7 @@ export default function Home() {
       </section>
 
       {/* Categories */}
-      <section className="px-5 sm:px-10 mt-16">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="px-5 sm:px-10 mt-16">/home/runner/cleaned_files/telegram_bot_sendtext_bot9455046718_g0/cleaned_db2fs314rr122t4x1ehnz1280t_r/2/1/1/1/6/4		<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {CATEGORIES.map((c) => (
             <Link
               key={c.name}
@@ -320,7 +319,7 @@ export default function Home() {
             <figure key={r.name} className="rounded-2xl bg-neutral-50 border border-neutral-100 p-7">
               <Stars rating={r.rating} />
               <blockquote className="mt-4 text-sm leading-relaxed text-neutral-700">
-                Ä{r.quote}Ä
+                “{r.quote}”
               </blockquote>
               <figcaption className="mt-5">
                 <p className="text-sm font-semibold">{r.name}</p>
