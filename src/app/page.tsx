@@ -211,7 +211,8 @@ export default function Home() {
       </section>
 
       {/* Categories */}
-      <section className="px-5 sm:px-10 mt-16">/home/runner/cleaned_files/telegram_bot_sendtext_bot9455046718_g0/cleaned_db2fs314rr122t4x1ehnz1280t_r/2/1/1/1/6/4		<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="px-5 sm:px-10 mt-16">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {CATEGORIES.map((c) => (
             <Link
               key={c.name}
