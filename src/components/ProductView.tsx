@@ -11,7 +11,7 @@ import {
   type Product,
 } from "@/lib/products";
 import { useCart } from "./CartContext";
-import { BagIcon, HeartIcon, StarIcon, TruckIcon } from "./icons";
+import { BagIcon, ArrowIcon, HeartIcon, StarIcon, TruckIcon } from "./icons";
 
 export default function ProductView({ product }: { product: Product }) {
   const { add } = useCart();
@@ -54,15 +54,59 @@ export default function ProductView({ product }: { product: Product }) {
         {/* Gallery */}
         <div>
           <div className="bg-cream rounded-xl aspect-[1/0.96] relative overflow-hidden">
-            <Image
-              key={gallery[activeImage]}
-              src={gallery[activeImage]}
-              alt={`${product.name} in ${selectedColor.name}`}
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 45vw"
-            />
+            <div
+              className="flex h-full w-full transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${activeImage * 100}%)` }}
+            >
+              {gallery.map((img, i) => (
+                <div key={img} className="relative h-full w-full shrink-0">
+                  <Image
+                    src={img}
+                    alt={`${product.name} in ${COLOR_OPTIONS.find((c) => c.image === img)?.name ?? ""}`}
+                    fill
+                    priority={i === 0}
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 45vw"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {activeImage > 0 && (
+              <button
+                aria-label="Previous image"
+                onClick={() => setActiveImage((i) => Math.max(0, i - 1))}
+                className="absolute left-4 top-1/2 -translate-y-1/2 size-10 rounded-full bg-white/90 text-neutral-900 shadow-md flex items-center justify-center hover:bg-white transition-colors"
+              >
+                <ArrowIcon className="size-4 rotate-180" />
+              </button>
+            )}
+            {activeImage < gallery.length - 1 && (
+              <button
+                aria-label="Next image"
+                onClick={() => setActiveImage((i) => Math.min(gallery.length - 1, i + 1))}
+                className="absolute right-4 top-1/2 -translate-y-1/2 size-10 rounded-full bg-white/90 text-neutral-900 shadow-md flex items-center justify-center hover:bg-white transition-colors"
+              >
+                <ArrowIcon className="size-4" />
+              </button>
+            )}
+
+            <span className="absolute top-4 right-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold shadow-sm">
+              {activeImage + 1} / {gallery.length}
+            </span>
+
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
+              {gallery.map((img, i) => (
+                <button
+                  key={img}
+                  aria-label={`Go to image ${i + 1}`}
+                  onClick={() => setActiveImage(i)}
+                  className={`size-2 rounded-full transition-colors ${
+                    i === activeImage ? "bg-neutral-900" : "bg-white/80"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
 
           <div className="mt-3 grid grid-cols-5 gap-3">
